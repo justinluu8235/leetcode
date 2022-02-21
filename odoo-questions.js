@@ -86,18 +86,42 @@
 // let s = "Welcome to Indonesia";
 // console.log(recursiveScoreCount(s, 0));
 
-const checkAmazingWords =  (word) => {
-    if(word.length < 4 || word.length > 9){
-return "length of word has to be between 4 and 9 letters";
-}
-else{
-    if(word.includes("odoo")){
-        return "yes"
-    }
+// const checkAmazingWords =  (word) => {
+//     if(word.length < 4 || word.length > 9){
+// return "length of word has to be between 4 and 9 letters";
+// }
+// else{
+//     if(word.includes("odoo")){
+//         return "yes"
+//     }
 
-}
+// }
     
+//     }
+
+
+//     console.log(checkAmazingWords("odosd"))
+
+
+
+const puppeteer = require('puppeteer');
+let scrapeURL = async(url ) => {
+    //starts up browser
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url);
+    const element = await page.$x('//*[@id="o-sh-faq"]');
+    let textContent = await element[0].getProperty('textContent');
+    let text = textContent['_remoteObject']['value'].slice(20000)
+    let textArr = text.split(' ');
+    console.log(textArr);
+    let count = 0;
+    for(let i=0; i<textArr.length; i++){
+        if(textArr[i] == "Odoo.sh" ){
+            count++;
+        }
     }
-
-
-    console.log(checkAmazingWords("odosd"))
+    console.log(count);
+    return count;
+}
+scrapeURL('https://www.odoo.sh/faq')
