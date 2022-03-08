@@ -17,8 +17,6 @@
         return null;
     }
 
-
-
     let linkedListLength = 0;
     let node = head;
     while( node != null){
@@ -40,7 +38,7 @@
     //  5 + 1 = 6 - 3 = 3
 
     let newHeadIndex = linkedListLength + 1 - numRotations;
-    
+
     let newHead;
     let count = 0;
     let temp = head;
